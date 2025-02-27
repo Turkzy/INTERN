@@ -15,7 +15,7 @@ mongoose.connect(config.connectionString);
 const app = express();
 
 app.use(express.json());
-const cors = require("cors");
+
 
 const corsOptions = {
     origin: ["http://localhost:3000", "https://test-ihub-cloud-database.onrender.com"], // Explicitly allow only your frontend
