@@ -15,17 +15,20 @@ mongoose.connect(config.connectionString);
 const app = express();
 
 app.use(express.json());
+const cors = require("cors");
+
 const corsOptions = {
-    origin: "*", // Allow all origins, or specify: ["http://localhost:3000", "https://your-deployed-frontend.com"]
+    origin: ["http://localhost:3000", "https://test-ihub-cloud-database.onrender.com"], // Explicitly allow only your frontend
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-    credentials: true,
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
+    credentials: true, // ✅ Required for authentication tokens
 };
 
 app.use(cors(corsOptions));
 
 // Handle preflight requests (OPTIONS)
 app.options("*", cors(corsOptions));
+
 
   
 
