@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../Design/Login.css";
 
 const Login = () => {
   const [name, setName] = useState("");
@@ -13,67 +14,66 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:5000/login", {
+      const response = await axios.post("http://localhost:5000/api/auth/login", {
         name,
         password,
       });
 
+      console.log("Login Response:", response.data);
+
       localStorage.setItem("token", response.data.accessToken);
-      navigate("/"); 
+      navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-blue-50">
-      <div className="bg-white shadow-lg rounded-lg p-6 flex w-full max-w-4xl">
-        {/* Left Side */}
-        <div className="w-1/2 bg-cover bg-center rounded-l-lg" style={{ backgroundImage: "url('/your-image.jpg')" }}>
-          <div className="p-6 text-white">
-            <h2 className="text-3xl font-bold">Capture Your Journeys</h2>
+    <div className="login-container">
+      <div className="login-box">
+        {/* Left Side - Image Section */}
+        <div className="login-left">
+          <div className="login-left-content">
+            <h2>Capture Your Journeys</h2>
             <p>Record your travel experiences and memories in your personal travel journal.</p>
           </div>
         </div>
 
         {/* Right Side - Login Form */}
-        <div className="w-1/2 p-8">
-          <h2 className="text-2xl font-semibold mb-4">Login</h2>
+        <div className="login-right">
+          <h2 className="login-title">Login</h2>
 
-          {error && <p className="text-red-500">{error}</p>}
+          {error && <p className="login-error">{error}</p>}
 
-          <form onSubmit={handleLogin}>
-            <div className="mb-4">
-              <label className="block text-gray-600">Name</label>
+          <form className="login-form" onSubmit={handleLogin}>
+            <div className="input-group">
+              <label>Name</label>
               <input
                 type="text"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="login-input"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-gray-600">Password</label>
+            <div className="input-group">
+              <label>Password</label>
               <input
                 type="password"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="login-input"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
-            <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg">
+            <button type="submit" className="login-button">
               LOGIN
             </button>
           </form>
 
-          <div className="text-center mt-4">
+          <div className="create-account">
             <p>Don't have an account?</p>
-            <button
-              className="text-blue-500 underline"
-              onClick={() => navigate("/Register")}
-            >
+            <button className="create-account-link" onClick={() => navigate("/Register")}>
               Create Account
             </button>
           </div>

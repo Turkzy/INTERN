@@ -21,19 +21,19 @@ const Register = () => {
       });
 
       localStorage.setItem("token", response.data.accessToken);
-      navigate("/login"); // Redirect to dashboard after registration
+      navigate("/login"); 
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-blue-50">
-      <div className="bg-white shadow-lg rounded-lg p-6 flex w-full max-w-4xl">
+    <div className="Register-container">
+      <div className="image-left">
         {/* Left Side - Image */}
-        <div className="w-1/2 bg-cover bg-center rounded-l-lg" style={{ backgroundImage: "url('/your-image.jpg')" }}>
-          <div className="p-6 text-white">
-            <h2 className="text-3xl font-bold">Join Us</h2>
+        <div  style={{ backgroundImage: "url('/your-image.jpg')" }}>
+          <div >
+            <h2 className="title-left">Join Us</h2>
             <p>Create an account to start your journey!</p>
           </div>
         </div>
